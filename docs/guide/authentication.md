@@ -1,20 +1,20 @@
 # Authentication
 
-The Arable API provides 3 methods of authentication to the API. Depending on your specific application needs you can authenticat via one the following methods: `Basic Auth`, `Bearer Token` or `API Keys`. 
+The Arable API provides 3 methods of authentication to the API. Depending on your specific application needs you can authenticate via one the following methods: `Basic Auth`, `Bearer Token` or `API Keys`. 
 
 Requests can be made to each individual page using `Basic Auth`. As long as the `Authorization` header is sent with the correct credentials, access will be granted.
 
-`API Keys` can be generated via the API and then included in the parameter string of a url. The benefit of this, is that an `API Key` can be scoped with individual permissions and also be set to expire.
+`API Keys` can be generated via the API and then included in the parameter string of a url. The benefit of this is that an `API Key` can be scoped with individual permissions and also be set to expire.
 
 
 ## Basic
 
-Requests can be made to each individual page using `Basic Auth`. As long as the `Authorization` header is sent with the correct credentials, access will be granted. The `Authorization` header must contain the word `Basic` followed by a base-64 encoded string of the user name and password concatenated by a colon (:) character.
+Requests can be made to each individual page using `Basic Auth`. As long as the `Authorization` header is sent with the correct credentials, access will be granted. The `Authorization` header must contain the word `Basic` followed by a base-64 encoded string of the user name and password concatenated by a colon ( : ) character.
 
 Example:
 
-If the user was test@test.com and the password was "getmedata". 
-which would yield a string like this: `dGVzdEB0ZXN0LmNvbTpnZXRtZWRhdGE=`
+If the user was test@test.com and the password was "getmedata",
+it would yield a string like this: `dGVzdEB0ZXN0LmNvbTpnZXRtZWRhdGE=`
 This is also described in [RFC2617](https://tools.ietf.org/html/rfc2617).
 
 ```bash curl -X GET \
@@ -54,7 +54,7 @@ This token must be kept as a secret and discarded when a user requests to be log
 :::
 ## Apikey
 
-`API Keys` can be generated via the API and then included in the parameter string of a url. The benefit of this, is that an `API Key` can be scoped with individual permissions and also be set to expire.
+`API Keys` can be generated via the API and then included in the parameter string of a url. The benefit of this is that an `API Key` can be scoped with individual permissions and also be set to expire.
 
 Example:
 ```
