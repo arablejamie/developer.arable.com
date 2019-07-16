@@ -6,6 +6,10 @@ module.exports = [
     link: "https://api-user.arable.cloud/api/v2/doc"
   },
   {
+    text: "Support",
+    link: "https://support.arable.com"
+  },
+  {
     text: "Learn More",
     items: [
       {
