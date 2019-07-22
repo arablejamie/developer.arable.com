@@ -6,10 +6,11 @@ Requests can be made to each individual page using `Basic Auth`. As long as the 
 
 `API Keys` can be generated via the API and then included in the parameter string of a url. The benefit of this, is that an `API Key` can be scoped with individual permissions and also be set to expire.
 
+[[toc]]
 
 ## Basic
 
-Requests can be made to each individual page using `Basic Auth`. As long as the `Authorization` header is sent with the correct credentials, access will be granted. The `Authorization` header must contain the word `Basic` followed by a base-64 encoded string of the user name and password concatenated by a colon (:) character.
+Requests can be made to each individual page using `Basic Auth`. As long as the `Authorization` header is sent with the correct credentials, access will be granted. The `Authorization` header must contain the word `Basic` followed by a base-64 encoded string of the user name and password concatenated by a colon `:` character.
 
 Example:
 
@@ -18,7 +19,7 @@ which would yield a string like this: `dGVzdEB0ZXN0LmNvbTpnZXRtZWRhdGE=`
 This is also described in [RFC2617](https://tools.ietf.org/html/rfc2617).
 
 ```bash curl -X GET \
-  https://api-user-test.arable.cloud/api/v2/devices \
+  https://api-user.arable.cloud/api/v2/devices \
   -H 'Authorization: Basic dGVzdEB0ZXN0LmNvbTpnZXRtZWRhdGE=' \
 ```
 
@@ -52,20 +53,206 @@ Example:
 ::: warning Note
 This token must be kept as a secret and discarded when a user requests to be logged out.
 :::
+
+
 ## Apikey
 
 `API Keys` can be generated via the API and then included in the parameter string of a url. The benefit of this, is that an `API Key` can be scoped with individual permissions and also be set to expire.
 
-Example:
+### Usages
+1) You can use `API Key` in `Authorization` header
+```bash
+ curl -X GET \
+  https://api-user.arable.cloud/api/v2/devices \
+  -H 'Authorization: Apikey dcd05016-00e1-4220-8a5c-23261821c1ff'
+```
+
+2) Or you can use `API Key` in url.
 ```
 /api/v2/locations/summary?apikey=dcd05016-00e1-4220-8a5c-23261821c1ff
 ```
 
+::: danger Security Risk
+But be aware of the risk when sharing your `API Key` in url. Anyone gets your `API Key` will get all the [permission scopes](#scopes) you granted to it. Only share `API Key` with expiration datetime on it. You can modify or deactivate an `API Key` after sharing it.
+:::
 
 ### Create an API Key
+Here is the [API references](https://api-user.arable.cloud/api/v2/doc#operation/post_apikey_list) for creating `API Key`.
 
+::: tip Tip
+You need to use either [Basic](#basic) or [Bearer](#bearer) token to create `API Key`. You can't create another `API Key` with an old `API Key`.
+:::
+
+Request Example
+```bash
+curl -X POST \
+  https://api-user.arable.cloud/api/v2/apikeys \
+  -H 'authorization: Basic dGVzdEB0ZXN0LmNvbTpnZXRtZWRhdGE' \
+  -H 'content-type: application/json' \
+  -d '{
+        "scopes": [
+        "data:read"
+      ],
+        "name": "data apikey",
+        "exp": "2019-07-23T15:40:15Z",
+        "active": true
+      }'
+```
+
+Response
+```
+{
+    "scopes": [
+        "data:read"
+    ],
+    "updated": "2019-07-22T16:17:12.408366+00:00",
+    "apikey": "dcd05016-00e1-4220-8a5c-23261821c1ff",
+    "name": "data apikey",
+    "created": "2019-07-22T16:17:12.408345+00:00",
+    "created_by": "5b5b66176a6c993f2e1d3dbd",
+    "exp": "2019-07-23T15:40:15+00:00",
+    "active": true,
+    "id": "5d35e188f65b2214626eddeb",
+    "last_seen": "2019-07-22T16:17:12.408429+00:00"
+}
+```
+
+Then you can use the `apikey` field from response like [this](#usages)
 
 #### Scopes
+You must specify `scopes` when creating `API Key`. Supported scopes can be found in [API references](https://api-user.arable.cloud/api/v2/doc#operation/post_apikey_list). The most up to date definitions of all available scopes can be found in this endpoint https://api-user.arable.cloud/api/v2/apikeys/scopes
 
-### Apikey in url
-### Apikey in header
+Here is an example of scopes definitions
+```
+{
+    "data:read": "Allow reading all history data",
+    "orgs:write": "Allow modifying org and managing org members",
+    "users:read": "Allow reading user info",
+    "teams:write": "Allow modifying/creating/deleting team and managing team members",
+    "notifications:write": "Allow modifying/creating/deleting notifications",
+    "teams:read": "Allow reading team info",
+    "annotations:write": "Allow modifying/creating/deleting annotations",
+    "orgs:read": "Allow reading org info and org members",
+    "devices:read": "Allow reading devices",
+    "notifications:read": "Allow reading notifications",
+    "locations:write": "Allow modifying locations",
+    "annotations:read": "Allow reading annotations",
+    "users:write": "Allow modifying user, but cannot change password",
+    "apikeys:read": "Allow reading Apikey info",
+    "locations:read": "Allow reading locations"
+}
+```
+
+For example, if you want to allow this `API Key` to read `/data` endpoints and `/locations` endpoints, and also allow modifying `/locations`. Then the scope field in request body should look like this
+```
+["data:read", "locations:read", "locations:write"]
+```
+It is an array of strings.
+
+#### Name
+`name` field can be any string you want to name your `API Key`.
+
+#### Expiration Time
+`exp` defines the experiration datetime (UTC) of `API Key`. It is optional. You don't need to provide this field if you don't want it to expire.
+
+### List all API Keys you own
+[API references](https://api-user.arable.cloud/api/v2/doc#operation/get_apikey_list)
+
+Request Example
+```bash
+curl -X GET \
+  https://api-user.arable.cloud/api/v2/apikeys \
+  -H 'authorization: Basic dGVzdEB0ZXN0LmNvbTpnZXRtZWRhdGE' \
+```
+
+Response
+```
+[
+    {
+        "scopes": [
+            "data:read"
+        ],
+        "updated": "2019-07-22T16:17:12.408366+00:00",
+        "apikey": "78096f8a-44f5-4011-8ab1-0c357341edfew",
+        "name": "data apikey",
+        "created": "2019-07-22T16:17:12.408345+00:00",
+        "created_by": "5b5b66176a6c993f2e1dwdscc",
+        "exp": "2019-07-23T15:40:15+00:00",
+        "active": true,
+        "id": "5d35e188f65b2214626ecwqwer",
+        "last_seen": "2019-07-22T16:17:12.408429+00:00"
+    },
+    {
+        "scopes": [
+            "data:read"
+        ],
+        "updated": "2019-07-22T16:18:38.894230+00:00",
+        "apikey": "bb864d40-211a-4ecb-bfc7-1e8e33cqwercv",
+        "name": "data apikey",
+        "created": "2019-07-22T16:18:38.894205+00:00",
+        "created_by": "5b5b66176a6c993f2e1dwdscc",
+        "exp": "2019-07-23T15:40:15+00:00",
+        "active": true,
+        "id": "5d35e1def65b2214626ecervcve",
+        "last_seen": "2019-07-22T16:18:38.894293+00:00"
+    }
+]
+```
+
+
+### Update API Key
+Here is the [API references](https://api-user.arable.cloud/api/v2/doc#operation/put_apikey) for updating `API Key`.
+
+You can change scopes, name and expiration time of `API Key`. You can also deactivate it by setting `active` field to `false`.
+Update an `API Key` by its `id` (`5d35e188f65b2214626ecwqwer` in this example), not the `apikey` value.
+
+Request Example
+```bash
+curl -X PUT \
+  https://api-user.arable.cloud/api/v2/apikeys/5d35e188f65b2214626ecwqwer \
+  -H 'authorization: Basic dGVzdEB0ZXN0LmNvbTpnZXRtZWRhdGE' \
+  -H 'content-type: application/json' \
+  -d '{
+        "scopes": [
+          "locations:read"
+        ],
+        "name": "new name",
+        "exp": "2019-07-25T15:40:15Z",
+        "active": false
+      }'
+```
+
+Response
+```
+{
+    "scopes": [
+        "locations:read"
+    ],
+    "updated": "2019-07-22T17:22:25.918589+00:00",
+    "apikey": "78096f8a-44f5-4011-8ab1-0c357341bcec",
+    "name": "new name",
+    "created": "2019-07-22T16:17:12.408345+00:00",
+    "created_by": "5b5b66176a6c993f2e1dwdscc",
+    "exp": "2019-07-24T15:40:15+00:00",
+    "active": false,
+    "id": "5d35e188f65b2214626ecwqwer",
+    "last_seen": "2019-07-22T16:17:12.408429+00:00"
+}
+```
+
+### Delete API Key
+Here is the [API references](https://api-user.arable.cloud/api/v2/doc#operation/put_apikey) for deleting `API Key`.
+Delete an `API Key` by its `id` (`5d35e188f65b2214626ecwqwer` in this example), not the `apikey` value.
+
+Request Example
+```bash
+curl -X DELETE \
+  https://api-user.arable.cloud/api/v2/apikeys/5d35e188f65b2214626ecwqwer \
+  -H 'authorization: Basic dGVzdEB0ZXN0LmNvbTpnZXRtZWRhdGE'
+```
+
+Server will reponse code `204` if `API Key` was successfully deleted
+
+::: warning Note
+API Key cannot be recovered after deletion. [Deactivate](#update-api-key) it if you may need it again.
+:::
