@@ -64,12 +64,12 @@ This token must be kept as a secret and discarded when a user requests to be log
 ```bash
  curl -X GET \
   https://api-user.arable.cloud/api/v2/devices \
-  -H 'Authorization: Apikey dcd05016-00e1-4220-8a5c-23261821c1ff'
+  -H 'Authorization: Apikey dcd023786-00e1-4220-8a5c-23261821c1ff'
 ```
 
 2) Or you can use `API Key` in url.
 ```
-/api/v2/locations/summary?apikey=dcd05016-00e1-4220-8a5c-23261821c1ff
+/api/v2/locations/summary?apikey=dcd023786-00e1-4220-8a5c-23261821c1ff
 ```
 
 ::: danger Security Risk
@@ -106,7 +106,7 @@ Response
         "data:read"
     ],
     "updated": "2019-07-22T16:17:12.408366+00:00",
-    "apikey": "dcd05016-00e1-4220-8a5c-23261821c1ff",
+    "apikey": "dcd0sdf242300e1-4220-8a5c-23261821c1ff",
     "name": "data apikey",
     "created": "2019-07-22T16:17:12.408345+00:00",
     "created_by": "5b5b66176a6c993f2e1d3dbd",
@@ -173,7 +173,7 @@ Response
             "data:read"
         ],
         "updated": "2019-07-22T16:17:12.408366+00:00",
-        "apikey": "78096f8a-44f5-4011-8ab1-0c357341edfew",
+        "apikey": "7123647da-44f5-4011-8ab1-0c357341edfew",
         "name": "data apikey",
         "created": "2019-07-22T16:17:12.408345+00:00",
         "created_by": "5b5b66176a6c993f2e1dwdscc",
@@ -187,7 +187,7 @@ Response
             "data:read"
         ],
         "updated": "2019-07-22T16:18:38.894230+00:00",
-        "apikey": "bb864d40-211a-4ecb-bfc7-1e8e33cqwercv",
+        "apikey": "dv1234df-211a-4ecb-bfc7-1e8e33cqwercv",
         "name": "data apikey",
         "created": "2019-07-22T16:18:38.894205+00:00",
         "created_by": "5b5b66176a6c993f2e1dwdscc",
