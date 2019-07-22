@@ -1,6 +1,6 @@
 # Authentication
 
-The Arable API provides 3 methods of authentication to the API. Depending on your specific application needs you can authenticat via one the following methods: `Basic Auth`, `Bearer Token` or `API Keys`. 
+The Arable API provides 3 methods of authentication to the API. Depending on your specific application needs you can authenticate via one the following methods: `Basic Auth`, `Bearer Token` or `API Keys`. 
 
 Requests can be made to each individual page using `Basic Auth`. As long as the `Authorization` header is sent with the correct credentials, access will be granted.
 
