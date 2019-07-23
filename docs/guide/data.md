@@ -10,7 +10,7 @@ Example:
 ```bash
 curl -X GET \
   https://api-user.arable.cloud/api/v2/schemas \
-  -H 'Authorization: Basic <user:password>'
+  -H 'Authorization: Basic dGVzdEB0ZXN0LmNvbTpnZXRtZWRhdGE=' \
 ```
 
 The result will be an array of table names. Each of these table names can be used in a subsequent call where it becomes the URL parameter to the `/schemas` endpoint. To get the metadata for the `daily` table, for example, you would specify `/schemas/daily`.
@@ -19,7 +19,7 @@ Example:
 ```bash
 curl -X GET \
   https://api-user.arable.cloud/api/v2/schemas/daily \
-  -H 'Authorization: Basic <user:password>'
+  -H 'Authorization: Basic dGVzdEB0ZXN0LmNvbTpnZXRtZWRhdGE=' \
 ```
 
 The result is an array of JSON objects that contain the metadata for a column including `description`, `data_type` and `column_name`. 
