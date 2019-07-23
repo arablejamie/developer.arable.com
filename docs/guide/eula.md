@@ -8,11 +8,10 @@ Example:
 ``` bash
 curl -X POST \
   https://api-user.arable.cloud/api/v2/eulas/email \
-  -H 'Content-Type: application/json' \
-  -H 'Authorization: Basic <user:password>'
+  -H 'Authorization: Basic dGVzdEB0ZXN0LmNvbTpnZXRtZWRhdGE=' \
 ```
 
-The above request will send the ` Terms and Conditions ` email to the user. 
+The above request will send the ` Terms and Conditions ` email to the current user. 
 
 Once read, the EULA can be accepted by calling the [accept eula](https://api-user.arable.cloud/api/v2/doc#operation/post_user_eula) endpoint, which will update the EULA signed date for the user, to indicate that user has signed current EULA.
 
