@@ -1,5 +1,7 @@
 # Data
 
+[[toc]]
+
 ## Understanding the Schema
 
 The [schemas](https://api-user.arable.cloud/api/v2/doc#operation/get_schemas) and [tables](https://api-user.arable.cloud/api/v2/doc#operation/get_schema) endpoints were intended to show the descriptions of the data that is available within the Arable platform.
@@ -56,7 +58,10 @@ Results are paginated as described under the Cursor Pagination section of these 
 - `end_time` - query end time as an iso-formatted string (default is the current time);
 
 as well as a result formatting option:
-- `local_time` - time zone name (e.g., America/Los_Angeles) or offset in seconds (e.g., -25200); if included on the request, the results will include a `local_time` column with `time` converted to the specified time zone.
+- `local_time` - there are three potential input formats. If included on the request, the results will include a `local_time` column with `time` converted to the specified time zone or offset by the specified amount of time. Though most tables store data in UTC, there are a few tables which do not and are detailed [here](#table-timezones). The three potential formats are:
+  - Time zone name (e.g., `America/Los_Angeles` which is UTC-7 or UTC-8 depending on daylight savings time). This is a daylight savings time (DST) aware format and will return the correct local time even if the data crosses the switch-over period between DST and regular time.
+  - ISO format (e.g. `-04:00` which is UTC-4). This is a flat offset in hours and minutes from UTC. This is not DST aware.
+  - Offset in seconds (e.g. `-25200` which is UTC-7). This is a flat offset in seconds from UTC. This is not DST aware.
 
 Example (JSON):
 
@@ -169,3 +174,9 @@ time,tair,rh,slp,precip
 ...
 2019-07-01T09:00:00+0000,74.3,97.0,1019.0,0.02
 ```
+
+## Table Timezones
+
+Although most tables store data in UTC time and require the `local_time` parameter if you want data that is not UTC, there are the exceptions when UTC data is meaningless or is more confusing so the data is stored differently:
+
+- The `daily` table is stored in local time. As this table contains aggregations, averages, and extremes from a day, it's most meaningful if that is the local 00:00 to 23:59 day and not the UTC 00:00 to 23:59 day. In this case, the `local_time` parameter is not needed.
