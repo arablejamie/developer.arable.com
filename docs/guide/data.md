@@ -1,5 +1,7 @@
 # Data
 
+[[toc]]
+
 ## Understanding the Schema
 
 The [schemas](https://api-user.arable.cloud/api/v2/doc#operation/get_schemas) and [tables](https://api-user.arable.cloud/api/v2/doc#operation/get_schema) endpoints were intended to show the descriptions of the data that is available within the Arable platform.
@@ -56,7 +58,10 @@ Results are paginated as described under the Cursor Pagination section of these 
 - `end_time` - query end time as an iso-formatted string (default is the current time);
 
 as well as a result formatting option:
-- `local_time` - time zone name (e.g., America/Los_Angeles) or offset in seconds (e.g., -25200); if included on the request, the results will include a `local_time` column with `time` converted to the specified time zone.
+- `local_time` - there are three potential input formats. If included on the request, the results will include a `local_time` column with `time` converted to the specified time zone or offset by the specified amount of time. The three potential formats are:
+  - Time zone name (e.g., `America/Los_Angeles` which is UTC-7 or UTC-8 depending on daylight savings time). This is a daylight savings time (DST) aware format and will return the correct local time even if the data crosses the switch-over period between DST and regular time.
+  - ISO format (e.g. `-04:00` which is UTC-4). This is a flat offset in hours and minutes from UTC. This is not DST aware.
+  - Offset in seconds (e.g. `-25200` which is UTC-7). This is a flat offset in seconds from UTC. This is not DST aware.
 
 Example (JSON):
 
