@@ -23,10 +23,10 @@ module.exports = {
             '',
             'eula',
             'authentication',
-            'headers',
             'pagination',
             'permission-system',
             'data',
+            'column-filtering',
             'errors'
           ]
         },
