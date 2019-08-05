@@ -177,8 +177,6 @@ time,tair,rh,slp,precip
 
 ## Table Timezones
 
-Although most tables store data in UTC time, there are a few notable exceptions when UTC data is meaningless or is more confusing so the data is stored or returned in local time so the `local_time` parameter is not needed:
+Although most tables store data in UTC time and require the `local_time` parameter if you want data that is not UTC, there are the exceptions when UTC data is meaningless or is more confusing so the data is stored differently:
 
-- The `daily` table is stored in local time. As this table contains aggregations, averages, and extremes from a day, it's most meaningful if that is the local 00:00 to 23:59 day and not the UTC 00:00 to 23:59 day.
-
-- The `local_hourly` table is stored in UTC time but is offset by the location timezone *without* needing the `local_time` parameter. As not all timezones fall evenly on the hour (e.g. UTC+9:30), this table converts the UTC time so that you always have timestamps that fall on the hour (e.g. 00:00 or 01:00) even in cases where the offset is not a full hour.
+- The `daily` table is stored in local time. As this table contains aggregations, averages, and extremes from a day, it's most meaningful if that is the local 00:00 to 23:59 day and not the UTC 00:00 to 23:59 day. In this case, the `local_time` parameter is not needed.
