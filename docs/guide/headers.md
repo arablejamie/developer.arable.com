@@ -6,7 +6,7 @@
 ## X-Fields
 If you are interested in only retrieving specific parts of an object instead of the full object, you can use the `X-Fields` header to do just that.
 
-**Note:** for the [/data](#tag/data) endpoint, use the `select` query paramater, not the `X-Fields` header, to request specific columns of data as that will be faster.
+**Note:** for the [/data](data.md#requesting-data) endpoint, use the `select` query paramater, not the `X-Fields` header, to request specific columns of data as that will be faster.
 
 The `X-Fields` header is a comma-separated list of object fields you want returned by the endpoint surrounded by brackets.
 
