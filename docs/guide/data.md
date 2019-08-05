@@ -51,7 +51,7 @@ Results are paginated as described under the Cursor Pagination section of these 
 
 - `device` - device name, e.g. A123456; one of `device` and `location` is required;
 - `location` - location id; one of `device` and `location` is required;
-- `select` - comma-separated string of requested column names (default is all available columns);
+- `select` - comma-separated string of requested column names (default is all available columns). More detail on when to use this can be found [here](column-filtering.md#select);
 - `start_time` - query start time as an iso-formatted string (default depends on the table queried);
 - `end_time` - query end time as an iso-formatted string (default is the current time);
 
