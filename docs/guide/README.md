@@ -10,4 +10,4 @@ All data is sent and received as JSON.
 
 ## Changes from API v1.0
 
-Read more [here](/migration-guide.html)
+Read more [here](/migration-guide.html).
