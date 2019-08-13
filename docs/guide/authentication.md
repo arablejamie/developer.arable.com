@@ -1,21 +1,20 @@
 # Authentication
 
-The Arable API provides 3 methods of authentication to the API. Depending on your specific application needs you can authenticate via one the following methods: `Basic Auth`, `Bearer Token` or `API Keys`. 
+Arable Distillery provides 3 methods of authentication to the API. Depending on your specific application needs, you can authenticate via one the following methods: `Basic Auth`, `Bearer Token`, or `API Keys`. 
 
 Requests can be made to each individual page using `Basic Auth`. As long as the `Authorization` header is sent with the correct credentials, access will be granted.
 
-`API Keys` can be generated via the API and then included in the parameter string of a url. The benefit of this, is that an `API Key` can be scoped with individual permissions and also be set to expire.
+`API Keys` can be generated via the API and then included in the parameter string of a url. The benefit of this is that an `API Key` can be scoped with individual permissions, and also be set to expire.
 
 [[toc]]
 
 ## Basic
 
-Requests can be made to each individual page using `Basic Auth`. As long as the `Authorization` header is sent with the correct credentials, access will be granted. The `Authorization` header must contain the word `Basic` followed by a base-64 encoded string of the user name and password concatenated by a colon `:` character.
+Requests can be made to each individual page using `Basic Auth`. As long as the `Authorization` header is sent with the correct credentials, access will be granted. The `Authorization` header must contain the word `Basic` followed by a Base64-encoded string of the user name and password concatenated by a colon `:` character.
 
 Example:
 
-If the user was test@test.com and the password was "getmedata". 
-which would yield a string like this: `dGVzdEB0ZXN0LmNvbTpnZXRtZWRhdGE=`
+User test@test.com with password "getmedata" would yield a string like this: `dGVzdEB0ZXN0LmNvbTpnZXRtZWRhdGE=`.
 This is also described in [RFC2617](https://tools.ietf.org/html/rfc2617).
 
 ```bash curl -X GET \
@@ -25,7 +24,7 @@ This is also described in [RFC2617](https://tools.ietf.org/html/rfc2617).
 
 ## Bearer
 
-In applications where retaining the password is not recommended, the `Bearer Token` can be used. To use `Bearer Token` authentication, you need first to authenticate at: `api/v2/auth/token` by creating a `POST` request which includes a JSON object with the properties of `email` and `password`. The result will be a JSON object with the `token` and `user_id`. The `Authorization` header would then be updated to include "`Bearer <token>`" and this would authorize access to all the resources that user can see.
+In applications where retaining the password is not recommended, the `Bearer Token` can be used. To use `Bearer Token` authentication, you need first to authenticate at `api/v2/auth/token` by creating a `POST` request which includes a JSON object with the properties of `email` and `password`. The result will be a JSON object with the `token` and `user_id`. The `Authorization` header would then be updated to include "`Bearer <token>`" and this would authorize access to all the resources that user can see.
 
 Example:
 ``` bash
@@ -55,35 +54,35 @@ This token must be kept as a secret and discarded when a user requests to be log
 :::
 
 
-## Apikey
+## API Key
 
-`API Keys` can be generated via the API and then included in the parameter string of a url. The benefit of this, is that an `API Key` can be scoped with individual permissions and also be set to expire.
+`API Keys` can be generated via the API and then included in the parameter string of a url. The benefit of this is that an `API Key` can be scoped with individual permissions and also be set to expire.
 
 ### Usages
-1) You can use `API Key` in `Authorization` header
+1) You can use `API Key` in `Authorization` header:
 ```bash
  curl -X GET \
   https://api-user.arable.cloud/api/v2/devices \
   -H 'Authorization: Apikey dcd023786-00e1-4220-8a5c-23261821c1ff'
 ```
 
-2) Or you can use `API Key` in url.
+2) Or you can use `API Key` in url:
 ```
 /api/v2/locations/summary?apikey=dcd023786-00e1-4220-8a5c-23261821c1ff
 ```
 
 ::: danger Security Risk
-But be aware of the risk when sharing your `API Key` in url. Anyone gets your `API Key` will get all the [permission scopes](#scopes) you granted to it. Only share `API Key` with expiration datetime on it. You can modify or deactivate an `API Key` after sharing it.
+But be aware of the risk when sharing your `API Key` in url. Anyone who gets your `API Key` will get all the [permission scopes](#scopes) you granted to it. Only share `API Key` with expiration datetime on it. You can modify or deactivate an `API Key` after sharing it.
 :::
 
 ### Create an API Key
-Here is the [API references](https://api-user.arable.cloud/api/v2/doc#operation/post_apikey_list) for creating `API Key`.
+Here are the [API references](https://api-user.arable.cloud/api/v2/doc#operation/post_apikey_list) for creating `API Key`.
 
 ::: tip Tip
-You need to use either [Basic](#basic) or [Bearer](#bearer) token to create `API Key`. You can't create another `API Key` with an old `API Key`.
+You need to use either the [Basic](#basic) or [Bearer](#bearer) token to create `API Key`. You can't create another `API Key` with an old `API Key`.
 :::
 
-Request Example
+Request ExampleL
 ```bash
 curl -X POST \
   https://api-user.arable.cloud/api/v2/apikeys \
@@ -99,7 +98,7 @@ curl -X POST \
       }'
 ```
 
-Response
+Response:
 ```
 {
     "scopes": [
@@ -117,12 +116,12 @@ Response
 }
 ```
 
-Then you can use the `apikey` field from response like [this](#usages)
+Then you can use the `API Key` field from the response like [this](#usages).
 
 #### Scopes
-You must specify `scopes` when creating `API Key`. Supported scopes can be found in [API references](https://api-user.arable.cloud/api/v2/doc#operation/post_apikey_list). The most up to date definitions of all available scopes can be found in this endpoint https://api-user.arable.cloud/api/v2/apikeys/scopes
+You must specify `scopes` when creating `API Key`. Supported scopes can be found in [API references](https://api-user.arable.cloud/api/v2/doc#operation/post_apikey_list). The most up-to-date definitions of all available scopes can be found in this [endpoint](https://api-user.arable.cloud/api/v2/apikeys/scopes).
 
-Here is an example of scopes definitions
+Here is an example of scopes definitions:
 ```
 {
     "data:read": "Allow reading all history data",
@@ -143,29 +142,29 @@ Here is an example of scopes definitions
 }
 ```
 
-For example, if you want to allow this `API Key` to read `/data` endpoints and `/locations` endpoints, and also allow modifying `/locations`. Then the scope field in request body should look like this
+For example, if you want to allow this `API Key` to read `/data` endpoints and `/locations` endpoints, and also allow it to modify `/locations`, then the scope field in the request body should look like this:
 ```
 ["data:read", "locations:read", "locations:write"]
 ```
 It is an array of strings.
 
 #### Name
-`name` field can be any string you want to name your `API Key`.
+`Name` field can be any string you want to name your `API Key`.
 
 #### Expiration Time
-`exp` defines the experiration datetime (UTC) of `API Key`. It is optional. You don't need to provide this field if you don't want it to expire.
+`Exp` defines the expiration datetime (UTC) of `API Key`. You don't need to provide this field if you don't want it to expire; it is optional.
 
 ### List all API Keys you own
 [API references](https://api-user.arable.cloud/api/v2/doc#operation/get_apikey_list)
 
-Request Example
+Request Example:
 ```bash
 curl -X GET \
   https://api-user.arable.cloud/api/v2/apikeys \
   -H 'authorization: Basic dGVzdEB0ZXN0LmNvbTpnZXRtZWRhdGE' \
 ```
 
-Response
+Response:
 ```
 [
     {
@@ -201,12 +200,12 @@ Response
 
 
 ### Update API Key
-Here is the [API references](https://api-user.arable.cloud/api/v2/doc#operation/put_apikey) for updating `API Key`.
+Here are the [API references](https://api-user.arable.cloud/api/v2/doc#operation/put_apikey) for updating `API Key`.
 
-You can change scopes, name and expiration time of `API Key`. You can also deactivate it by setting `active` field to `false`.
-Update an `API Key` by its `id` (`5d35e188f65b2214626ecwqwer` in this example), not the `apikey` value.
+You can change scopes, name, and expiration time of `API Key`. You can also deactivate it by setting `active` field to `false`.
+Update an `API Key` by its `id` (`5d35e188f65b2214626ecwqwer` in this example), not the `API Key` value.
 
-Request Example
+Request Example:
 ```bash
 curl -X PUT \
   https://api-user.arable.cloud/api/v2/apikeys/5d35e188f65b2214626ecwqwer \
@@ -222,7 +221,7 @@ curl -X PUT \
       }'
 ```
 
-Response
+Response:
 ```
 {
     "scopes": [
@@ -241,7 +240,7 @@ Response
 ```
 
 ### Delete API Key
-Here is the [API references](https://api-user.arable.cloud/api/v2/doc#operation/put_apikey) for deleting `API Key`.
+Here are the [API references](https://api-user.arable.cloud/api/v2/doc#operation/put_apikey) for deleting `API Key`.
 Delete an `API Key` by its `id` (`5d35e188f65b2214626ecwqwer` in this example), not the `apikey` value.
 
 Request Example
@@ -251,7 +250,7 @@ curl -X DELETE \
   -H 'authorization: Basic dGVzdEB0ZXN0LmNvbTpnZXRtZWRhdGE'
 ```
 
-Server will reponse code `204` if `API Key` was successfully deleted
+Server will reponse code `204` if `API Key` was successfully deleted.
 
 ::: warning Note
 API Key cannot be recovered after deletion. [Deactivate](#update-api-key) it if you may need it again.
