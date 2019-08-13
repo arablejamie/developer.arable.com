@@ -24,7 +24,7 @@ module.exports = {
             'eula',
             'authentication',
             'pagination',
-            'permission-system',
+            //'permission-system',
             'data',
             'column-filtering',
             'errors'
