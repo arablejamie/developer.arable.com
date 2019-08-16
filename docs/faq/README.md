@@ -15,7 +15,7 @@ You must be an Arable customer with an up to date software subscription.
 ## Where can I find API reference documentation?
 Please refer to the [API Documentation](http://linktoapidocumentation.com)
 ## Are there any client libraries for the Arable API?
-At the moment, we are working on **Python** and **R** client libraries. Please reach out via support@arable.com if you would 
+At the moment, we are working on **Python** and **R** client libraries. Please reach out via support@arable.com if you are interested in a beta.
 ## I'm having trouble with my code, where can I go for help?
 You can reach out via [email](support@arable.com) and check our [Contribution Guide](http://linktocontributionguide.com)
 ## What are your terms of use?

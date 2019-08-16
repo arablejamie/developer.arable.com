@@ -175,8 +175,8 @@ time,tair,rh,slp,precip
 2019-07-01T09:00:00+0000,74.3,97.0,1019.0,0.02
 ```
 
-## Table Timezones
+## Timezones
 
-Although most tables store data in UTC time and require the `local_time` parameter if you want data that is not UTC, there are the exceptions when UTC data is meaningless or is more confusing so the data is stored differently:
+Most data on the Arable platform are stored in UTC time and require the `local_time` parameter if you require the time to be converted to a local time (or specifically not UTC). There are the exceptions when UTC data is meaningless or is more confusing so the data is stored differently:
 
 - The `daily` table is stored in local time. As this table contains aggregations, averages, and extremes from a day, it's most meaningful if that is the local 00:00 to 23:59 day and not the UTC 00:00 to 23:59 day. In this case, the `local_time` parameter is not needed.
