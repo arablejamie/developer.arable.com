@@ -177,6 +177,34 @@ time,tair,rh,slp,precip
 
 ## Timezones
 
-Most data on the Arable platform are stored in UTC time and require the `local_time` parameter if you require the time to be converted to a local time (or specifically not UTC). There are the exceptions when UTC data is meaningless or is more confusing so the data is stored differently:
+Timezones are a difficult issue in general and in particular for remote sensed data. The Arable platform attempts to make it easy for the user to view the data in the time zone that they want. 
 
-- The `daily` table is stored in local time. As this table contains aggregations, averages, and extremes from a day, it's most meaningful if that is the local 00:00 to 23:59 day and not the UTC 00:00 to 23:59 day. In this case, the `local_time` parameter is not needed.
+
+Data in the Arable platform is generally stored in [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) (UTC) time. 
+
+- The `Location` resource now has a `tz_name` property which specifies the time zone local to the location where the device was recording data - or "device local time".
+
+- On the `/data` endpoint there is a `local_time` parameter if you require the time to be converted to a local time (or specifically not UTC). The output of the `tz_name` can be specified here. 
+
+- The `daily` table is stored in device local time. As this table contains aggregations, averages, and extremes from a day, it is most meaningful if that is the local 00:00 to 23:59:59 day and not the UTC 00:00 to 23:59 day.
+
+- The `local_hourly` table is stored in UTC time and aggregated in device local time. Fetching this information will require the user to specify the `local_time` parameter, otherwise the information will be shown in UTC time.
+
+- The `hourly` table is stored in UTC and also aggregated in UTC time. This is recommended for scientific usage to compare data across sites ignoring time zone. 
+
+
+## Unit Conversion
+
+With each request of data, unit conversion can be performed based upon the class of measurement. For instance, for hourly data, there might be an average, minimum and maximum temperatures but in order to convert all of them you can specify only one argument of `temp`.
+
+```
+/data/hourly?temp=f
+```
+
+| Parameter  | Units  | Description   |
+|---|---|---|
+| temp  | **c*, f  | Temperature in either Celsius or Fahrenheit  |
+| pres  | **mb*, kp  | Pressure in either millibars or kilopascals   |
+| size | **mm*, in  | Size (e.g. rain) in either millimeters or inches   |
+| pct | **pct*, dec  | Percentage (e.g relative humidity) in percentages or decimal  |
+_* denotes default_
