@@ -1,5 +1,7 @@
-This site is built with vuepress, detailed vuepress documentation can be found here
-https://v1.vuepress.vuejs.org/
+
+# Arable Developer's Site
+
+https://developer.arable.com
 
 # Quick start
 
@@ -22,3 +24,8 @@ yarn docs:build
 | `/guild/README.md` | `/guide` |
 | `/guild/howto.md` | `/guide/howto.html` |
 | `/config.md` | `/config.html` |
+
+# Credits
+
+This site is built with vuepress, detailed vuepress documentation can be found here
+https://v1.vuepress.vuejs.org/

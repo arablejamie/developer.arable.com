@@ -76,7 +76,7 @@ This token must be kept as a secret and discarded when a user requests to be log
 ```
 
 ::: danger Security Risk
-Be aware of the risk when sharing your `API Key` in url. Anyone who gets your `API Key` will get all the [permission scopes](#scopes) you granted to it. Only share an `API Key` with an expiration datetime on it. You can modify or deactivate an `API Key` after sharing it.
+Be aware of the risk when sharing your `API Key` in a url. Anyone who gets your `API Key` will get all the [permission scopes](#scopes) you granted to it. Only share an `API Key` with an expiration datetime on it. You can modify or deactivate an `API Key` after sharing it.
 :::
 
 ### Creation
