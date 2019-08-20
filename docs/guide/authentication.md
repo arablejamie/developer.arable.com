@@ -16,11 +16,17 @@ Example:
 
 If the username was test@test.com and the password was "getmedata", the base64 encoded user and password would be a string like this: `dGVzdEB0ZXN0LmNvbTpnZXRtZWRhdGE=`. This is also described in [RFC2617](https://tools.ietf.org/html/rfc2617).
 
-Basic token in python:
+Base64 encoding of username and password in linux/osx:
+```
+echo -n "username:password"| base64
+```
+
+Base64 encoding of username and password in python:
 ```from base64 import b64encode
 token = b64encode("{0}:{1}".format(username, password).encode('utf-8')).decode('utf-8')
 ```
 
+Request using basic auth
 ```bash curl -X GET \
   https://api-user.arable.cloud/api/v2/devices \
   -H 'Authorization: Basic dGVzdEB0ZXN0LmNvbTpnZXRtZWRhdGE=' \
