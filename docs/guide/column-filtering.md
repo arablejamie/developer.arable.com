@@ -33,14 +33,13 @@ Use `*` to request all other fields:
 
 ## Select
 
-In the data endpoint, instead of using the `X-Fields` header, you should use the `select` parameter as it is faster.
+For the data endpoint, we recomment you use the `select` parameter instead of using the `X-Fields` header.
 
-'select' is a comma-separated string of requested column names with the default being to return all columns. Depending on the size of the time window you are searching, filtering by columns can have a noticeable impact on the amount of data you receive from the api.
-
+`select` is a comma-separated string of requested column names with the default being to return all columns. Depending on the size of the time window you are searching, filtering by columns can have a noticeable impact on the amount of data you receive from the API.
 
 ### Usage
 
-For example, if you are interested in the temperature, humidity, and precipitation only you could do:
+For example, if you are interested in the temperature, humidity, and precipitation only you could make the following request:
 
 ```bash
 curl -i \

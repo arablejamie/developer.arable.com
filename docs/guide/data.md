@@ -182,7 +182,7 @@ Timezones are a difficult issue in general and in particular for remote sensed d
 
 Data in the Arable platform is generally stored in [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) (UTC) time. 
 
-- The `Location` resource now has a `tz_name` property which specifies the time zone local to the location where the device was recording data - or "device local time".
+- The `Location` resource has a `tz_name` property which specifies the time zone local to the location where the device was recording data - or "device local time".
 
 - On the `/data` endpoint there is a `local_time` parameter if you require the time to be converted to a local time (or specifically not UTC). The output of the `tz_name` can be specified here. 
 
@@ -197,6 +197,7 @@ Data in the Arable platform is generally stored in [Coordinated Universal Time](
 
 With each request of data, unit conversion can be performed based upon the class of measurement. For instance, for hourly data, there might be an average, minimum and maximum temperatures but in order to convert all of them you can specify only one argument of `temp`.
 
+Example:
 ```
 /data/hourly?temp=f
 ```
@@ -204,7 +205,9 @@ With each request of data, unit conversion can be performed based upon the class
 | Parameter  | Units  | Description   |
 |---|---|---|
 | temp  | **c*, f  | Temperature in either Celsius or Fahrenheit  |
-| pres  | **mb*, kp  | Pressure in either millibars or kilopascals   |
+| pres  | **mb*, kp  | Pressure (e.g. sea level pressure) in either millibars or kilopascals   |
 | size | **mm*, in  | Size (e.g. rain) in either millimeters or inches   |
-| pct | **pct*, dec  | Percentage (e.g relative humidity) in percentages or decimal  |
+| ratio | **pct*, dec  | Ratios (e.g relative humidity) in percentages or decimal  |
 _* denotes default_
+
+
