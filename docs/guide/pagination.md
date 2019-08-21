@@ -1,7 +1,7 @@
 # Pagination
 
 ## Limit - Page
-For model data (e.g., devices or locations), use the `limit` parameter to specify the number of records per page and `page` for the page of results to retrieve. The default limit is 24 and page is 1; the maximum limit is 10000.
+For model data (e.g., devices or locations), use the `limit` parameter to specify the number of records per page and `page` for the page of results to retrieve. The default `limit` is 24 and `page` is 1; the maximum `limit` is 10000.
 
 Example:
 ```bash
@@ -12,6 +12,7 @@ curl \
   -d "page=2"
 ```
 
+Response:
 ```text
 {
     "items": [
@@ -43,6 +44,7 @@ curl -i \
   -d "limit=5"
 ```
 
+Response:
 ```text
 HTTP/1.1 200 OK
 Access-Control-Allow-Origin: *
@@ -76,6 +78,7 @@ curl \
   -d "order=desc"
 ```
 
+Response:
 ```text
 time,tair
 2019-07-01T08:00:00+0000,24.5
@@ -106,6 +109,7 @@ curl -i \
   -d "cursor=MjAxOS0wNy0wMVQwNTowMDowMFo="
 ```
 
+Response:
 ```text
 HTTP/1.1 200 OK
 Access-Control-Allow-Origin: *
