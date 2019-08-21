@@ -17,7 +17,7 @@ footer: Copyright © 2019 Arable Labs
   </div>
   <div class="feature">
     <h2>Performant</h2>
-    <p>Microclimate-specific field analysis with off-the-grid applications on a global 3G cellular network.</p>
+    <p>Microclimate-specific field analysis with off-the-grid applications on a global cellular network.</p>
   </div>
   <div class="feature">
     <h2>Affordable</h2>
