@@ -12,20 +12,20 @@ footer: Copyright © 2019 Arable Labs
 
 <div class="features">
   <div class="feature">
-    <h2>Simplicity</h2>
-    <p>Out-of-the-box usability, intuitive software, and cross-platform integration capabilities make the Mark a one-stop solution.</p>
+    <h2>Simple</h2>
+    <p>Out-of-the-box usability, intuitive software, and cross-platform integration capabilities make Arable your one-stop solution.</p>
   </div>
   <div class="feature">
-    <h2>Performant</h2>
-    <p>Microclimate-specific field analysis with off-the-grid applications on a global cellular network.</p>
+    <h2>Reliable</h2>
+    <p>Microclimate-specific field analysis on over 40 data streams brings ground-truth accuracy on a global cellular network.</p>
   </div>
   <div class="feature">
-    <h2>Affordable</h2>
-    <p>Affordable price point and scalability to suit your needs, from small plots to multi-tiered operations.</p>
+    <h2>Scalable</h2>
+    <p>Affordable price point and customization to suit your needs, from small plots to multi-tiered operations.</p>
   </div>
 </div>
 
-### As Easy as 1, 2, 3
+### Easy as 1, 2, 3
 
 ``` bash
 curl -X GET \
@@ -34,5 +34,5 @@ curl -X GET \
 ```
 
 ::: warning VERSION NOTE
-Arable API v2 is in beta. See our changelog for release changes.
+Arable API 2.0 is in beta. See our changelog for release changes.
 :::
