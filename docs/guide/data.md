@@ -47,7 +47,7 @@ This information can be helpful when interpreting the returned data or for narro
 
 ## Requesting Data
 
-The [data](https://api-user.arable.cloud/api/v2/doc#operation/get_data) endpoint provides access to time series data from a specified table. It takes the name of the table to query as a path parameter, and returns data in JSON or CSV format depending on the value of an optional `accept` header (the default is JSON).
+The [data](https://api-user.arable.cloud/api/v2/doc#operation/get_data) endpoint provides access to time series data from a specified table. It takes the name of the table to query as a path parameter, and returns data in JSON or CSV format depending on the value of an optional `Accept` header (the default is JSON).
 
 Results are paginated as described under the Cursor Pagination section of these docs. Data units are converted according to the unit parameters provided on the request (example below). The data endpoint also accepts several filtering parameters:
 
